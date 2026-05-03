@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Idadiyah al-Miftah — Gen 15</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&family=Amiri:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:        #f3f9f4;
+  --bg2:       #eaf4ec;
+  --bg3:       #dceede;
+  --surface:   #ffffff;
+  --blue:      #1a7c3e;
+  --blue-mid:  #22a052;
+  --blue-soft: #c8ecd4;
+  --teal:      #c47f17;
+  --teal-soft: #fdedc8;
+  --ink:       #0d1f12;
+  --ink-mid:   #3a5a42;
+  --ink-dim:   #7a9a82;
+  --gold:      #e8820f;
+  --purple:    #7b3fa0;
+  --radius:    6px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--blue-soft); border-radius: 3px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem; height: 60px;
+  background: rgba(243,249,244,.95);
+  border-bottom: 1px solid rgba(26,124,62,.12);
+  backdrop-filter: blur(12px);
+}
+.nav-logo { display: flex; align-items: center; gap: .7rem; }
+.nav-logo-mark {
+  width: 32px; height: 32px; background: var(--blue);
+  border-radius: 4px; display: flex; align-items: center; justify-content: center;
+  font-family: 'Amiri', serif; font-size: 1.1rem; color: #fff; font-weight: 700;
+}
+.nav-logo-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .95rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink);
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-mid); text-decoration: none; transition: color .2s;
+}
+.nav-links a:hover { color: var(--blue); }
+.nav-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  background: var(--blue-soft); color: var(--blue);
+  padding: .3rem .85rem; border-radius: 100px;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 0 3rem;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+/* Soft mesh background */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 75% 50%, rgba(26,124,62,.08) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 80% at 10% 80%, rgba(196,127,23,.07) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 10%, rgba(123,63,160,.05) 0%, transparent 60%);
+}
+
+/* Big decorative circle — like PS orb */
+.hero-orb {
+  position: absolute;
+  right: -10%;
+  top: 50%; transform: translateY(-50%);
+  width: min(70vh, 680px); height: min(70vh, 680px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(26,124,62,.15) 0%, rgba(196,127,23,.06) 50%, transparent 75%);
+  border: 1px solid rgba(26,124,62,.12);
+  pointer-events: none;
+}
+.hero-orb::before {
+  content: '';
+  position: absolute; inset: 28px;
+  border-radius: 50%;
+  border: 1px dashed rgba(26,124,62,.1);
+}
+.hero-orb::after {
+  content: '';
+  position: absolute; inset: 70px;
+  border-radius: 50%;
+  border: 1px solid rgba(196,127,23,.08);
+}
+
+/* Arabic watermark inside orb */
+.hero-ar-wm {
+  position: absolute;
+  right: -2%;
+  top: 50%; transform: translateY(-50%);
+  font-family: 'Amiri', serif; font-weight: 700;
+  font-size: min(48vw, 560px);
+  color: rgba(26,124,62,.05);
+  line-height: 1;
+  pointer-events: none; user-select: none;
+}
+
+/* Left accent */
+.hero-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(to bottom, transparent 15%, var(--blue) 40%, var(--teal) 65%, transparent 85%); }
+
+.hero-content { position: relative; z-index: 2; max-width: 660px; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: .6rem;
+  background: var(--blue-soft); color: var(--blue);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  padding: .35rem 1rem; border-radius: 100px;
+  margin-bottom: 1.8rem;
+  animation: fadeUp .9s ease both;
+}
+.hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+
+.hero-arabic {
+  font-family: 'Amiri', serif; font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+  color: var(--ink); line-height: 1.2;
+  margin-bottom: .35rem;
+  animation: fadeUp .9s ease .1s both;
+}
+
+.hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.8rem, 7.5vw, 6.5rem);
+  font-weight: 900; text-transform: uppercase;
+  color: var(--ink); line-height: .96;
+  letter-spacing: -.01em; margin-bottom: 1.5rem;
+  animation: fadeUp .9s ease .2s both;
+}
+.hero-title .outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--blue);
+  display: block;
+}
+
+.hero-desc {
+  font-size: 1rem; line-height: 1.8;
+  color: var(--ink-mid); max-width: 460px;
+  margin-bottom: 2.5rem;
+  animation: fadeUp .9s ease .3s both;
+}
+
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp .9s ease .4s both; }
+
+.btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  padding: .78rem 2rem; border: none; border-radius: var(--radius);
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: transform .18s, box-shadow .18s, background .18s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-blue { background: var(--blue); color: #fff; box-shadow: 0 4px 16px rgba(26,124,62,.28); }
+.btn-blue:hover { background: var(--blue-mid); box-shadow: 0 6px 24px rgba(26,124,62,.38); }
+.btn-outline { background: transparent; color: var(--blue); border: 1.5px solid rgba(26,124,62,.35); }
+.btn-outline:hover { background: var(--blue-soft); border-color: var(--blue); }
+
+/* Hero scroll cue */
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 3rem; z-index: 2;
+  display: flex; align-items: center; gap: .7rem;
+}
+.hero-scroll-line { width: 36px; height: 1px; background: linear-gradient(to right, var(--blue), transparent); }
+.hero-scroll span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .65rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+/* Hero stats strip */
+.hero-stats {
+  position: absolute; bottom: 0; right: 0;
+  display: flex; align-items: stretch;
+}
+.hstat {
+  padding: 1.2rem 2rem;
+  background: var(--bg2);
+  border-top: 1px solid rgba(26,124,62,.12);
+  border-left: 1px solid rgba(26,124,62,.1);
+  text-align: center;
+}
+.hstat-n {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2rem; font-weight: 900; color: var(--blue); line-height: 1;
+}
+.hstat-l {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .62rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--ink-dim); margin-top: .2rem;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION BASE ── */
+section { padding: 6rem 3rem; }
+
+.s-chip {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .7rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: .75rem;
+}
+.s-chip::before { content: ''; width: 18px; height: 2px; background: var(--blue); border-radius: 1px; }
+
+.s-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; text-transform: uppercase;
+  color: var(--ink); line-height: 1.05; margin-bottom: 1rem;
+}
+
+.s-body {
+  font-size: .97rem; line-height: 1.85;
+  color: var(--ink-mid); max-width: 520px;
+}
+
+/* ── ABOUT ── */
+#about {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  background: var(--surface);
+  border-top: 1px solid rgba(26,124,62,.08);
+  border-bottom: 1px solid rgba(26,124,62,.08);
+}
+
+.about-vis {
+  position: relative; aspect-ratio: 4/5; max-width: 360px;
+  background: linear-gradient(145deg, var(--blue-soft), var(--teal-soft));
+  border-radius: 12px; overflow: hidden;
+}
+.about-vis-center {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+}
+.about-vis-ar {
+  font-family: 'Amiri', serif; font-size: min(38vw, 220px);
+  color: rgba(26,124,62,.15); line-height: 1; user-select: none;
+}
+.about-vis-label {
+  position: absolute; bottom: 1.2rem; left: 1.2rem; right: 1.2rem;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  display: flex; align-items: center; gap: .9rem;
+}
+.avis-icon {
+  width: 36px; height: 36px; background: var(--blue); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Amiri', serif; font-size: 1.1rem; color: #fff;
+}
+.avis-text strong {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .9rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--ink); display: block;
+}
+.avis-text span {
+  font-size: .78rem; color: var(--ink-dim);
+}
+
+/* Decorative corner dots */
+.about-vis::before {
+  content: '';
+  position: absolute; top: 1rem; right: 1rem;
+  width: 48px; height: 48px;
+  border-top: 2px solid rgba(26,124,62,.35);
+  border-right: 2px solid rgba(26,124,62,.35);
+  border-radius: 0 6px 0 0;
+}
+
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: .75rem;
+  margin-top: 2.5rem;
+}
+.sbox {
+  background: var(--bg2); border: 1px solid rgba(26,124,62,.1);
+  border-radius: 8px; padding: 1.3rem 1.2rem;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.sbox:hover { background: var(--blue-soft); border-color: rgba(26,124,62,.28); transform: translateY(-2px); }
+.sbox-n {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.4rem; font-weight: 900; color: var(--blue); line-height: 1;
+}
+.sbox-n sub { font-size: 1.2rem; color: var(--teal); }
+.sbox-l {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .65rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink-dim); margin-top: .3rem;
+}
+
+/* ── PROGRAM ── */
+#program { background: var(--bg); }
+
+.prog-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+
+.prog-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+}
+
+.pcard {
+  background: var(--surface);
+  border: 1px solid rgba(26,124,62,.1);
+  border-radius: 10px;
+  padding: 2rem 1.7rem;
+  position: relative; overflow: hidden;
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+.pcard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(26,124,62,.28);
+  box-shadow: 0 12px 36px rgba(26,124,62,.12);
+}
+.pcard::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(to right, var(--blue), var(--teal));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .3s ease;
+  border-radius: 10px 10px 0 0;
+}
+.pcard:hover::after { transform: scaleX(1); }
+
+.pcard-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .66rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ink-dim); margin-bottom: 1rem;
+}
+.pcard-ar {
+  font-family: 'Amiri', serif; font-size: 2.2rem;
+  color: var(--blue-soft);
+  display: block; margin-bottom: .8rem;
+  /* rendered as decorative, desaturated */
+  filter: saturate(1.5) brightness(.9);
+}
+/* Override: make arabic text on light bg readable/decorative */
+.pcard-ar { color: #a8d8b8; }
+
+.pcard-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.25rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--ink); margin-bottom: .6rem;
+}
+.pcard-desc { font-size: .875rem; line-height: 1.78; color: var(--ink-mid); }
+
+/* ── TEAM ── */
+#team { background: var(--surface); border-top: 1px solid rgba(26,124,62,.08); }
+
+.team-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: .85rem; margin-top: 2.5rem;
+}
+
+.mcard {
+  background: var(--bg);
+  border: 1px solid rgba(26,124,62,.09);
+  border-radius: 10px; padding: 1.8rem 1.4rem;
+  transition: transform .22s, border-color .22s, box-shadow .22s;
+  text-align: left;
+}
+.mcard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(26,124,62,.25);
+  box-shadow: 0 8px 28px rgba(26,124,62,.1);
+}
+
+.mcard-av {
+  width: 48px; height: 48px;
+  background: var(--blue-soft); border: 1.5px solid rgba(26,124,62,.25);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.15rem; font-weight: 800; color: var(--blue);
+  margin-bottom: 1rem;
+}
+.mcard-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--ink); margin-bottom: .2rem;
+}
+.mcard-role {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .66rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--teal);
+}
+
+/* ── GALLERY ── */
+#gallery { background: var(--bg2); border-top: 1px solid rgba(26,124,62,.08); }
+
+.gal-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 220px 220px;
+  gap: .75rem; margin-top: 2.5rem;
+}
+.gal-item {
+  background: var(--surface);
+  border: 1.5px dashed rgba(26,124,62,.18);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; cursor: pointer;
+  transition: border-color .25s, transform .25s;
+}
+.gal-item:hover { border-color: var(--blue); transform: scale(1.015); border-style: solid; }
+.gal-item:first-child { grid-row: span 2; }
+.gal-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+.gal-ph {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .68rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(26,124,62,.35);
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+}
+.gal-ph svg { width: 28px; height: 28px; stroke: rgba(26,124,62,.28); fill: none; stroke-width: 1.5; }
+
+/* ── CONTACT ── */
+#contact { background: var(--surface); border-top: 1px solid rgba(26,124,62,.08); }
+
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3rem; align-items: start; }
+
+.cinfo-list { display: flex; flex-direction: column; gap: 0; }
+.cinfo {
+  display: flex; gap: 1rem; padding: 1.2rem 0;
+  border-bottom: 1px solid rgba(26,124,62,.08);
+}
+.cinfo:first-child { border-top: 1px solid rgba(26,124,62,.08); }
+.cinfo-icon {
+  width: 38px; height: 38px; flex-shrink: 0;
+  background: var(--blue-soft); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .95rem;
+}
+.cinfo-lbl {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .65rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: .2rem;
+}
+.cinfo-val { font-size: .9rem; color: var(--ink-mid); }
+
+.form-col { display: flex; flex-direction: column; gap: 1.1rem; }
+.fg label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .67rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink-mid); display: block; margin-bottom: .4rem;
+}
+.fg input, .fg textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1.5px solid rgba(26,124,62,.15);
+  border-radius: var(--radius);
+  padding: .78rem 1rem;
+  color: var(--ink);
+  font-family: 'Barlow', sans-serif; font-size: .9rem;
+  outline: none;
+  transition: border-color .2s, background .2s;
+  -webkit-appearance: none;
+}
+.fg input:focus, .fg textarea:focus {
+  border-color: var(--blue);
+  background: var(--surface);
+}
+.fg textarea { resize: vertical; min-height: 110px; }
+
+/* ── FOOTER ── */
+footer {
+  background: #0d2215; color: rgba(255,255,255,.55);
+  padding: 2rem 3rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+}
+.footer-ar { font-family: 'Amiri', serif; font-size: 1.4rem; color: rgba(255,255,255,.28); }
+.footer-copy {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+}
+.footer-gen {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .68rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  background: var(--teal-soft); color: var(--teal);
+  padding: .28rem .8rem; border-radius: 100px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 4rem 1.5rem; }
+  .hero { padding: 0 1.5rem; }
+  .hero-stats { display: none; }
+  .hero-scroll { left: 1.5rem; }
+  #about { grid-template-columns: 1fr; gap: 3rem; }
+  .about-vis { max-width: 100%; }
+  .prog-grid { grid-template-columns: 1fr 1fr; }
+  .gal-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .gal-item:first-child { grid-row: auto; }
+  .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 580px) {
+  .prog-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .gal-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .hero-title { font-size: 3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">م</div>
+    <div class="nav-logo-text">Al-Miftah</div>
+  </div>
+  <div class="nav-links">
+    <a href="#about">Tentang</a>
+    <a href="#program">Program</a>
+    <a href="#team">Tim</a>
+    <a href="#gallery">Galeri</a>
+    <a href="#contact">Kontak</a>
+  </div>
+  <div class="nav-badge">Gen 15</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-accent"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-ar-wm">م</div>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="hero-tag-dot"></span>
+      Tim Idadiyah · Generasi ke-15
+    </div>
+    <div class="hero-arabic">المفتاح</div>
+    <h1 class="hero-title">
+      Idadiyah
+      <span class="outline">al-Miftah</span>
+    </h1>
+    <p class="hero-desc">
+      Bersama menempa ilmu, membangun akhlak, dan menorehkan jejak nyata
+      bagi generasi yang memberi manfaat bagi umat.
+    </p>
+    <div class="hero-btns">
+      <a href="#about" class="btn btn-blue">Kenali Kami</a>
+      <a href="#program" class="btn btn-outline">Lihat Program</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-n">15</div>
+      <div class="hstat-l">Generasi</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n">30+</div>
+      <div class="hstat-l">Anggota</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n">6</div>
+      <div class="hstat-l">Program</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-vis">
+    <div class="about-vis-center">
+      <div class="about-vis-ar">م</div>
+    </div>
+    <div class="about-vis-label">
+      <div class="avis-icon">م</div>
+      <div class="avis-text">
+        <strong>Al-Miftah Gen 15</strong>
+        <span>Idadiyah · 2025</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="s-chip">Tentang Kami</p>
+    <h2 class="s-title">Generasi<br/>ke-15</h2>
+    <p class="s-body">
+      Tim Idadiyah al-Miftah Generasi ke-15 adalah kumpulan pelajar yang
+      berdedikasi dalam menempuh perjalanan keilmuan dan pengembangan diri.
+      Dibimbing semangat <em>tholabul 'ilmi</em>, kami tumbuh bersama dalam
+      bingkai ukhuwwah dan etos kerja yang tinggi.
+    </p>
+
+    <div class="stats-row">
+      <div class="sbox">
+        <div class="sbox-n">15<sub>×</sub></div>
+        <div class="sbox-l">Generasi</div>
+      </div>
+      <div class="sbox">
+        <div class="sbox-n">30<sub>+</sub></div>
+        <div class="sbox-l">Anggota Aktif</div>
+      </div>
+      <div class="sbox">
+        <div class="sbox-n">6</div>
+        <div class="sbox-l">Program Unggulan</div>
+      </div>
+      <div class="sbox">
+        <div class="sbox-n">1</div>
+        <div class="sbox-l">Tekad Bersama</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section id="program">
+  <div class="prog-header">
+    <div>
+      <p class="s-chip">Program Unggulan</p>
+      <h2 class="s-title">Yang Kami<br/>Lakukan</h2>
+    </div>
+  </div>
+
+  <div class="prog-grid">
+    <div class="pcard">
+      <div class="pcard-num">01</div>
+      <span class="pcard-ar">درس</span>
+      <h3 class="pcard-title">Kajian Kitab</h3>
+      <p class="pcard-desc">Menelaah kitab-kitab klasik bersama para asatidz untuk memperkuat landasan ilmu syar'i.</p>
+    </div>
+    <div class="pcard">
+      <div class="pcard-num">02</div>
+      <span class="pcard-ar">ذكر</span>
+      <h3 class="pcard-title">Mudzakarah</h3>
+      <p class="pcard-desc">Sesi diskusi dan pengulangan pelajaran bersama agar setiap materi benar-benar melekat.</p>
+    </div>
+    <div class="pcard">
+      <div class="pcard-num">03</div>
+      <span class="pcard-ar">ليل</span>
+      <h3 class="pcard-title">Qiyamul Lail</h3>
+      <p class="pcard-desc">Meneguhkan ruhiyah dan kedekatan kepada Allah lewat ibadah malam bersama.</p>
+    </div>
+    <div class="pcard">
+      <div class="pcard-num">04</div>
+      <span class="pcard-ar">أخ</span>
+      <h3 class="pcard-title">Ukhuwwah</h3>
+      <p class="pcard-desc">Mempererat persaudaraan melalui rihlah, kegiatan sosial, dan saling mendukung antar anggota.</p>
+    </div>
+    <div class="pcard">
+      <div class="pcard-num">05</div>
+      <span class="pcard-ar">فوز</span>
+      <h3 class="pcard-title">Prestasi & Lomba</h3>
+      <p class="pcard-desc">Mengikuti kompetisi ilmiah dan keagamaan sebagai wujud kontribusi nyata kepada umat.</p>
+    </div>
+    <div class="pcard">
+      <div class="pcard-num">06</div>
+      <span class="pcard-ar">نمو</span>
+      <h3 class="pcard-title">Pengembangan Diri</h3>
+      <p class="pcard-desc">Workshop, pelatihan kepemimpinan, dan keterampilan hidup untuk bekal masa depan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <p class="s-chip">Jajaran Tim</p>
+  <h2 class="s-title">Pengurus Gen 15</h2>
+
+  <div class="team-grid">
+    <div class="mcard"><div class="mcard-av">K</div><div class="mcard-name">Nama Ketua</div><div class="mcard-role">Ketua Tim</div></div>
+    <div class="mcard"><div class="mcard-av">W</div><div class="mcard-name">Nama Wakil</div><div class="mcard-role">Wakil Ketua</div></div>
+    <div class="mcard"><div class="mcard-av">S</div><div class="mcard-name">Nama Sekretaris</div><div class="mcard-role">Sekretaris</div></div>
+    <div class="mcard"><div class="mcard-av">B</div><div class="mcard-name">Nama Bendahara</div><div class="mcard-role">Bendahara</div></div>
+    <div class="mcard"><div class="mcard-av">A</div><div class="mcard-name">Nama Anggota</div><div class="mcard-role">Anggota</div></div>
+    <div class="mcard"><div class="mcard-av">A</div><div class="mcard-name">Nama Anggota</div><div class="mcard-role">Anggota</div></div>
+    <div class="mcard"><div class="mcard-av">A</div><div class="mcard-name">Nama Anggota</div><div class="mcard-role">Anggota</div></div>
+    <div class="mcard"><div class="mcard-av">A</div><div class="mcard-name">Nama Anggota</div><div class="mcard-role">Anggota</div></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <p class="s-chip">Momen Bersama</p>
+  <h2 class="s-title">Galeri</h2>
+
+  <div class="gal-grid">
+    <div class="gal-item">
+      <div class="gal-ph">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Foto Utama
+      </div>
+    </div>
+    <div class="gal-item"><div class="gal-ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Foto 2</div></div>
+    <div class="gal-item"><div class="gal-ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Foto 3</div></div>
+    <div class="gal-item"><div class="gal-ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Foto 4</div></div>
+    <div class="gal-item"><div class="gal-ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Foto 5</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="s-chip">Hubungi Kami</p>
+  <h2 class="s-title">Kontak</h2>
+
+  <div class="contact-wrap">
+    <div class="cinfo-list">
+      <div class="cinfo"><div class="cinfo-icon">📍</div><div><div class="cinfo-lbl">Lokasi</div><div class="cinfo-val">Nama Pesantren / Instansi, Kota</div></div></div>
+      <div class="cinfo"><div class="cinfo-icon">📱</div><div><div class="cinfo-lbl">WhatsApp</div><div class="cinfo-val">+62 8xx xxxx xxxx</div></div></div>
+      <div class="cinfo"><div class="cinfo-icon">✉️</div><div><div class="cinfo-lbl">Email</div><div class="cinfo-val">idadiyah.almiftah@email.com</div></div></div>
+      <div class="cinfo"><div class="cinfo-icon">📸</div><div><div class="cinfo-lbl">Instagram</div><div class="cinfo-val">@idadiyah.almiftah</div></div></div>
+    </div>
+
+    <div class="form-col">
+      <div class="fg"><label>Nama Lengkap</label><input type="text" placeholder="Masukkan nama Anda"/></div>
+      <div class="fg"><label>Email / WhatsApp</label><input type="text" placeholder="Email atau nomor WA"/></div>
+      <div class="fg"><label>Pesan</label><textarea placeholder="Tulis pesan Anda…"></textarea></div>
+      <div><button class="btn btn-blue">Kirim Pesan</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-ar">بسم الله الرحمن الرحيم</div>
+  <div class="footer-copy">© 2025 Tim Idadiyah al-Miftah · All rights reserved</div>
+  <div class="footer-gen">Generation XV</div>
+</footer>
+
+</body>
+</html>
